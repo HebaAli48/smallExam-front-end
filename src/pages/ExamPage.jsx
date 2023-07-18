@@ -8,7 +8,7 @@ import QuestionChoices from "../components/examPage/QuestionChoices";
 import { Score } from "../utils/ScoreContext";
 import { useNavigate } from "react-router";
 import QuestionsProgress from "../components/examPage/QuestionsProgress";
-
+import { ExamPageImage } from "../utils/Images";
 const ExamPage = () => {
   // HOOKS
   const [words, setWords] = useState([]);
@@ -47,28 +47,31 @@ const ExamPage = () => {
 
   return (
     <>
-      <div className="flex flex-col items-center bg-gradient-to-tr from-blue-200 to-purple-200 pt-2">
-        {/* QUESTION */}
-        <Questions word={words[count]} count={count} />
-        <Score.Provider value={{ score, setScore }}>
-          {/* CHOICES */}
-          <QuestionChoices
-            word={words[count]}
-            score={score}
-            setScore={setScore}
-          />
-        </Score.Provider>
-        <div className="flex flex-col sm:flex-row sm:gap-10 gap-3 mt-5 justify-center items-center">
-          {count === 9 ? (
-            // SUBMMIT EXAM
-            <SubmitExam handleSubmitExam={handleSubmitExam} />
-          ) : (
-            // NEXT QUESTION
-            <NextWord handleNextWord={handleNextWord} />
-          )}
+      <div className="flex flex-col sm:flex-row justify-center w-full">
+        {ExamPageImage}
+        <div className="flex flex-col items-center bg-gradient-to-tr sm:w-[50vw] from-blue-200 to-purple-200 pt-2">
+          {/* QUESTION */}
+          <Questions word={words[count]} count={count} />
+          <Score.Provider value={{ score, setScore }}>
+            {/* CHOICES */}
+            <QuestionChoices
+              word={words[count]}
+              score={score}
+              setScore={setScore}
+            />
+          </Score.Provider>
+          <div className="flex flex-col md:flex-row md:gap-10 gap-3 mt-5 justify-center items-center">
+            {count === 9 ? (
+              // SUBMMIT EXAM
+              <SubmitExam handleSubmitExam={handleSubmitExam} />
+            ) : (
+              // NEXT QUESTION
+              <NextWord handleNextWord={handleNextWord} />
+            )}
+          </div>
+          {/* EXAM PROGRESS */}
+          <QuestionsProgress count={count} />
         </div>
-        {/* EXAM PROGRESS */}
-        <QuestionsProgress count={count} />
       </div>
     </>
   );

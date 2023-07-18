@@ -45,7 +45,7 @@ const QuestionChoices = ({ word }) => {
 
   return (
     <>
-      <div className="flex flex-col sm:flex-row gap-2 w-fit">
+      <div className="flex flex-col md:flex-row gap-2 w-fit">
         {/* CHOICES */}
         {choices.map((choice, index) => (
           <button
